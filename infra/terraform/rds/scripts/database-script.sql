@@ -8,8 +8,7 @@ DROP TABLE IF EXISTS "point";
 DROP TABLE IF EXISTS "announcement";
 DROP TABLE IF EXISTS "holiday";
 DROP TABLE IF EXISTS "domain";
-DROP TABLE IF EXISTS "availability";
-DROP TABLE IF EXISTS "user_availability";
+
 
 CREATE TABLE "domain" (
 	"id" UUID PRIMARY KEY,
@@ -98,19 +97,6 @@ CREATE TABLE "holiday" (
 );
 
 
-CREATE TABLE "availability" (
-	"id" UUID PRIMARY KEY,
-	"week_day" VARCHAR,
-	"schedule_id" UUID NOT null,
-	"status" BOOLEAN NOT NULL,
-	FOREIGN KEY (schedule_id) REFERENCES "schedule"(id)
-);
-
-CREATE TABLE user_availability(
-	User_Id UUID REFERENCES "user" (id),
-	Availability_Id UUID REFERENCES "availability" (id),
-	PRIMARY KEY (User_Id, Availability_Id)
-);
 
 INSERT INTO "domain" ("id", "name") values ('c24d74b5-6571-4e0b-ae40-8c8a703c6c08', 'TPE - Mauá');
 INSERT INTO "circuit" ("id", "name", "domain_id") VALUES ('9879e3de-6e79-4e4b-9312-d952d54ee2e1', 'SP-002', 'c24d74b5-6571-4e0b-ae40-8c8a703c6c08');
