@@ -8,9 +8,9 @@ DROP TABLE IF EXISTS "point";
 DROP TABLE IF EXISTS "announcement";
 DROP TABLE IF EXISTS "holiday";
 DROP TABLE IF EXISTS "domain";
-DROP TYPE IF EXISTS "week_days_enum";
+DROP TYPE IF EXISTS "week_day_enum";
 DROP TYPE IF EXISTS "gender_enum";
-DROP TYPE IF EXISTS "privileges_enum";
+DROP TYPE IF EXISTS "privilege_enum";
 DROP TABLE IF EXISTS "availability";
 
 
