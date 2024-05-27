@@ -9,9 +9,7 @@ DROP TABLE IF EXISTS "announcement";
 DROP TABLE IF EXISTS "holiday";
 DROP TABLE IF EXISTS "domain";
 DROP TABLE IF EXISTS "availability";
-DROP TYPE IF EXISTS "week_day_enum";
-DROP TYPE IF EXISTS "gender_enum";
-DROP TYPE IF EXISTS "privilege_enum";
+
 
 
 CREATE TABLE "domain" (
@@ -100,7 +98,6 @@ CREATE TABLE "holiday" (
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
-CREATE TYPE week_day_enum AS ENUM ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 CREATE TABLE "availability" (
     "id" UUID PRIMARY KEY,
     "week_day" TEXT,
