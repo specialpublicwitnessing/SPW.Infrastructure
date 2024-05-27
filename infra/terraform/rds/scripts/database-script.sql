@@ -8,10 +8,10 @@ DROP TABLE IF EXISTS "point";
 DROP TABLE IF EXISTS "announcement";
 DROP TABLE IF EXISTS "holiday";
 DROP TABLE IF EXISTS "domain";
+DROP TABLE IF EXISTS "availability";
 DROP TYPE IF EXISTS "week_day_enum";
 DROP TYPE IF EXISTS "gender_enum";
 DROP TYPE IF EXISTS "privilege_enum";
-DROP TABLE IF EXISTS "availability";
 
 
 CREATE TABLE "domain" (
@@ -43,18 +43,16 @@ CREATE TABLE "congregation" (
 	FOREIGN KEY (circuit_id) REFERENCES circuit(id)
 );
 
-CREATE TYPE gender_enum AS ENUM ('Male', 'Female');
-CREATE TYPE privilege_enum AS ENUM ('Publisher', 'Pioneer', 'Ministerial_Servant', 'Elder', 'Pioneer_Ministerial_Servant', 'Pioneer_Elder');
 CREATE TABLE "user" (
     "id" UUID PRIMARY KEY,
     "name" VARCHAR,
     "creation_date" TIMESTAMP,
     "email" VARCHAR,
     "phone_number" VARCHAR,
-    "gender" gender_enum,
+    "gender" TEXT,
     "birth_date" DATE,
     "baptism_date" DATE,
-    "privilege" privilege_enum,
+    "privilege" TEXT,
     "congregation_id" UUID NOT null,
 	FOREIGN KEY (congregation_id) REFERENCES "congregation"(id)
 );
@@ -105,7 +103,7 @@ CREATE TABLE "holiday" (
 CREATE TYPE week_day_enum AS ENUM ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
 CREATE TABLE "availability" (
     "id" UUID PRIMARY KEY,
-    "week_day" week_day_enum,
+    "week_day" TEXT,
     "point_id" UUID, 
     "schedule_id" UUID, 
     "domain_id" UUID, 
