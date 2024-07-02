@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS "user";
+DROP TABLE IF EXISTS "user" ;
 DROP TABLE IF EXISTS "special_day";
 DROP TABLE IF EXISTS "congregation";
 DROP TABLE IF EXISTS "circuit";
@@ -79,7 +79,7 @@ CREATE TABLE "point" (
     "address" VARCHAR,
     "image_url" VARCHAR,
     "google_maps_url" VARCHAR,
-    "minimum_grade" TEXT,
+    "minimum_user_grade" TEXT,
     "domain_id" UUID NOT null,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
