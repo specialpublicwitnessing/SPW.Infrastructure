@@ -51,6 +51,7 @@ CREATE TABLE "user" (
     "birth_date" DATE,
     "baptism_date" DATE,
     "privilege" TEXT,
+    "grade" TEXT,
     "congregation_id" UUID NOT null,
 	FOREIGN KEY (congregation_id) REFERENCES "congregation"(id)
 );
@@ -78,6 +79,7 @@ CREATE TABLE "point" (
     "address" VARCHAR,
     "image_url" VARCHAR,
     "google_maps_url" VARCHAR,
+    "minimum_grade" TEXT,
     "domain_id" UUID NOT null,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
