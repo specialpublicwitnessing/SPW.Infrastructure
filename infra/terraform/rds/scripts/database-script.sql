@@ -1,56 +1,54 @@
-DROP TABLE IF EXISTS "user"; 
-DROP TABLE IF EXISTS "special_day";
-DROP TABLE IF EXISTS "congregation";
-DROP TABLE IF EXISTS "circuit";
-DROP TABLE IF EXISTS "validity";
-DROP TABLE IF EXISTS "schedule";
-DROP TABLE IF EXISTS "point";
-DROP TABLE IF EXISTS "announcement";
-DROP TABLE IF EXISTS "holiday";
-DROP TABLE IF EXISTS "domain";
-DROP TABLE IF EXISTS "availability";
-
-
+DROP TABLE IF EXISTS "user" CASCADE;  
+DROP TABLE IF EXISTS "special_day" CASCADE;
+DROP TABLE IF EXISTS "congregation" CASCADE;
+DROP TABLE IF EXISTS "circuit" CASCADE;
+DROP TABLE IF EXISTS "validity" CASCADE;
+DROP TABLE IF EXISTS "schedule" CASCADE;
+DROP TABLE IF EXISTS "point" CASCADE;
+DROP TABLE IF EXISTS "announcement" CASCADE;
+DROP TABLE IF EXISTS "holiday" CASCADE;
+DROP TABLE IF EXISTS "domain" CASCADE;
+DROP TABLE IF EXISTS "availability" CASCADE;
 
 CREATE TABLE "domain" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR
+	"name" VARCHAR NOT NULL
 );
 
 CREATE TABLE "validity" (
     "id" UUID PRIMARY KEY,
     "start_date" TIMESTAMP NOT NULL,
     "end_date" TIMESTAMP NOT NULL,
-    "status" BOOLEAN NOT null,
-    "domain_id" UUID NOT null,
+    "status" BOOLEAN NOT NULL,
+    "domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "circuit" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR,
-	"domain_id" UUID NOT null,
+	"name" VARCHAR NOT NULL,
+	"domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "congregation" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR,
-	"number" VARCHAR,
-	"circuit_id" UUID NOT null,
+	"name" VARCHAR NOT NULL,
+	"number" VARCHAR NOT NULL,
+	"circuit_id" UUID NOT NULL,
 	FOREIGN KEY (circuit_id) REFERENCES circuit(id)
 );
 
 CREATE TABLE "user" (
     "id" UUID PRIMARY KEY,
-    "name" VARCHAR,
-    "creation_date" TIMESTAMP,
-    "email" VARCHAR,
-    "phone_number" VARCHAR,
-    "gender" VARCHAR,
-    "birth_date" DATE,
-    "baptism_date" DATE,
-    "privilege" VARCHAR,
+    "name" VARCHAR NOT NULL,
+    "creation_date" TIMESTAMP NOT NULL,
+    "email" VARCHAR NOT NULL,
+    "phone_number" VARCHAR NOT NULL,
+    "gender" VARCHAR NOT NULL,
+    "birth_date" DATE NOT NULL,
+    "baptism_date" DATE NOT NULL,
+    "privilege" VARCHAR NOT NULL,
     "grade" VARCHAR,
     "congregation_id" UUID NOT null,
 	FOREIGN KEY (congregation_id) REFERENCES "congregation"(id)
@@ -58,55 +56,55 @@ CREATE TABLE "user" (
 
 CREATE TABLE "special_day" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR,
+	"name" VARCHAR NOT NULL,
 	"start_date" TIMESTAMP NOT NULL,
-	"end_date" TIMESTAMP NOT NULL,
+	"end_date" TIMESTAMP NOT NULL NOT NULL,
 	"circuit_id" UUID NOT null,
 	FOREIGN KEY (circuit_id) REFERENCES circuit(id)
 );
 
 CREATE TABLE "schedule" (
 	"id" UUID PRIMARY KEY,
-	"time" VARCHAR,
-	"domain_id" UUID NOT null,
+	"time" VARCHAR NOT NULL,
+	"domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "point" (
     "id" UUID PRIMARY KEY,
-    "name" VARCHAR,
+    "name" VARCHAR NOT NULL,
     "number_of_publishers" INTEGER NOT NULL,
-    "address" VARCHAR,
-    "image_url" VARCHAR,
-    "google_maps_url" VARCHAR,
+    "address" VARCHAR NOT NULL,
+    "image_url" VARCHAR NOT NULL,
+    "google_maps_url" VARCHAR NOT NULL,
     "minimum_user_grade" VARCHAR,
-    "domain_id" UUID NOT null,
+    "domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "announcement"(
     "id" UUID PRIMARY KEY,
-    "title" VARCHAR,
-    "message" VARCHAR,
-    "domain_id" UUID NOT null,
+    "title" VARCHAR NOT NULL,
+    "message" VARCHAR NOT NULL,
+    "domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "holiday" (
     "id" UUID PRIMARY KEY,
-    "name" VARCHAR,
-    "date" DATE NOT null,
-    "domain_id" UUID NOT null,
+    "name" VARCHAR NOT NULL,
+    "date" DATE NOT null NOT NULL,
+    "domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "availability" (
     "id" UUID PRIMARY KEY,
-    "week_day" VARCHAR,
-    "point_id" UUID, 
-    "schedule_id" UUID, 
-    "domain_id" UUID, 
-    "status" BOOLEAN NOT null,
+    "week_day" VARCHAR NOT NULL,
+    "point_id" UUID NOT NULL, 
+    "schedule_id" UUID NOT NULL, 
+    "domain_id" UUID NOT NULL, 
+    "status" BOOLEAN NOT NULL,
     FOREIGN KEY ("point_id") REFERENCES "point"("id"),
     FOREIGN KEY ("schedule_id") REFERENCES "schedule"("id"),
     FOREIGN KEY ("domain_id") REFERENCES "domain"("id")   
