@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS "user" ;
+DROP TABLE IF EXISTS "user"; 
 DROP TABLE IF EXISTS "special_day";
 DROP TABLE IF EXISTS "congregation";
 DROP TABLE IF EXISTS "circuit";
@@ -47,11 +47,11 @@ CREATE TABLE "user" (
     "creation_date" TIMESTAMP,
     "email" VARCHAR,
     "phone_number" VARCHAR,
-    "gender" TEXT,
+    "gender" VARCHAR,
     "birth_date" DATE,
     "baptism_date" DATE,
-    "privilege" TEXT,
-    "grade" TEXT,
+    "privilege" VARCHAR,
+    "grade" VARCHAR,
     "congregation_id" UUID NOT null,
 	FOREIGN KEY (congregation_id) REFERENCES "congregation"(id)
 );
@@ -79,7 +79,7 @@ CREATE TABLE "point" (
     "address" VARCHAR,
     "image_url" VARCHAR,
     "google_maps_url" VARCHAR,
-    "minimum_user_grade" TEXT,
+    "minimum_user_grade" VARCHAR,
     "domain_id" UUID NOT null,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
@@ -87,7 +87,7 @@ CREATE TABLE "point" (
 CREATE TABLE "announcement"(
     "id" UUID PRIMARY KEY,
     "title" VARCHAR,
-    "message" text,
+    "message" VARCHAR,
     "domain_id" UUID NOT null,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
@@ -102,7 +102,7 @@ CREATE TABLE "holiday" (
 
 CREATE TABLE "availability" (
     "id" UUID PRIMARY KEY,
-    "week_day" TEXT,
+    "week_day" VARCHAR,
     "point_id" UUID, 
     "schedule_id" UUID, 
     "domain_id" UUID, 
