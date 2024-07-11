@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS "domain";
 
 CREATE TABLE "domain" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR
+	"name" VARCHAR NOT NULL
 );
 
 CREATE TABLE "validity" (
@@ -26,17 +26,17 @@ CREATE TABLE "validity" (
 
 CREATE TABLE "circuit" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR,
+	"name" VARCHAR NOT NULL,
 	"domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "congregation" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR,
-	"number" VARCHAR,
+	"name" VARCHAR NOT NULL,
+	"number" VARCHAR NOT NULL,
 	"circuit_id" UUID NOT NULL,
-	FOREIGN KEY (circuit_id) REFERENCES "circuit"(id)
+	FOREIGN KEY (circuit_id) REFERENCES circuit(id)
 );
 
 CREATE TABLE "user" (
@@ -85,7 +85,7 @@ CREATE TABLE "point" (
 CREATE TABLE "announcement"(
     "id" UUID PRIMARY KEY,
     "title" VARCHAR NOT NULL,
-    "message" text,
+    "message" VARCHAR NOT NULL,
     "domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
@@ -93,17 +93,17 @@ CREATE TABLE "announcement"(
 CREATE TABLE "holiday" (
     "id" UUID PRIMARY KEY,
     "name" VARCHAR NOT NULL,
-    "date" DATE NOT NULL,
+    "date" DATE NOT null NOT NULL,
     "domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "availability" (
     "id" UUID PRIMARY KEY,
-    "week_day" VARCHAR,
-    "point_id" UUID, 
-    "schedule_id" UUID, 
-    "domain_id" UUID, 
+    "week_day" VARCHAR NOT NULL,
+    "point_id" UUID NOT NULL, 
+    "schedule_id" UUID NOT NULL, 
+    "domain_id" UUID NOT NULL, 
     "status" BOOLEAN NOT NULL,
     FOREIGN KEY ("point_id") REFERENCES "point"("id"),
     FOREIGN KEY ("schedule_id") REFERENCES "schedule"("id"),
