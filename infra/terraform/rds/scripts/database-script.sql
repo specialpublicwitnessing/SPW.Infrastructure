@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS "domain";
 
 CREATE TABLE "domain" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR NOT NULL
+	"name" VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE "validity" (
@@ -26,37 +26,38 @@ CREATE TABLE "validity" (
 
 CREATE TABLE "circuit" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR NOT NULL,
+	"name" VARCHAR(100) NOT NULL,
 	"domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "congregation" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR NOT NULL,
-	"number" VARCHAR NOT NULL,
+	"name" VARCHAR(100) NOT NULL,
+	"number" VARCHAR(10) NOT NULL,
 	"circuit_id" UUID NOT NULL,
 	FOREIGN KEY (circuit_id) REFERENCES circuit(id)
 );
 
 CREATE TABLE "user" (
     "id" UUID NOT NULL PRIMARY KEY,
-    "name" VARCHAR NOT NULL,
+    "name" VARCHAR(100) NOT NULL,
     "creation_date" TIMESTAMP NOT NULL,
-    "email" VARCHAR NOT NULL,
-    "phone_number" VARCHAR NOT NULL,
-    "gender" VARCHAR NOT NULL,
-    "grade" VARCHAR,
+    "email" VARCHAR(100) NOT NULL UNIQUE,
+    "password" TEXT NOT NULL,
+    "phone_number" VARCHAR(20) NOT NULL,
+    "gender" VARCHAR(50) NOT NULL,
+    "grade" VARCHAR(50),
     "birth_date" DATE NOT NULL,
     "baptism_date" DATE NOT NULL,
-    "privilege" VARCHAR,
+    "privilege" VARCHAR(100),
     "congregation_id" UUID NOT NULL,
 	FOREIGN KEY (congregation_id) REFERENCES "congregation"(id)
 );
 
 CREATE TABLE "special_day" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR NOT NULL,
+	"name" VARCHAR(100) NOT NULL,
 	"start_date" TIMESTAMP NOT NULL,
 	"end_date" TIMESTAMP NOT NULL,
 	"circuit_id" UUID NOT NULL,
@@ -65,34 +66,34 @@ CREATE TABLE "special_day" (
 
 CREATE TABLE "schedule" (
 	"id" UUID PRIMARY KEY,
-	"time" VARCHAR NOT NULL,
+	"time" VARCHAR(100) NOT NULL,
 	"domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "point" (
     "id" UUID PRIMARY KEY,
-    "name" VARCHAR NOT NULL,
+    "name" VARCHAR(100) NOT NULL,
     "number_of_publishers" INTEGER NOT NULL,
-    "address" VARCHAR NOT NULL,
-    "image_url" VARCHAR NOT NULL,
-    "google_maps_url" VARCHAR NOT NULL,
-    "minimum_user_grade" VARCHAR,
+    "address" VARCHAR(100) NOT NULL,
+    "image_url" VARCHAR(100) NOT NULL,
+    "google_maps_url" VARCHAR(100) NOT NULL,
+    "minimum_user_grade" VARCHAR(100),
     "domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "announcement"(
     "id" UUID PRIMARY KEY,
-    "title" VARCHAR NOT NULL,
-    "message" VARCHAR NOT NULL,
+    "title" VARCHAR(100) NOT NULL,
+    "message" VARCHAR(100) NOT NULL,
     "domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "holiday" (
     "id" UUID PRIMARY KEY,
-    "name" VARCHAR NOT NULL,
+    "name" VARCHAR(100) NOT NULL,
     "date" DATE NOT null NOT NULL,
     "domain_id" UUID NOT NULL,
 	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
@@ -100,7 +101,7 @@ CREATE TABLE "holiday" (
 
 CREATE TABLE "availability" (
     "id" UUID PRIMARY KEY,
-    "week_day" VARCHAR NOT NULL,
+    "week_day" VARCHAR(100) NOT NULL,
     "point_id" UUID NOT NULL, 
     "schedule_id" UUID NOT NULL, 
     "domain_id" UUID NOT NULL, 
