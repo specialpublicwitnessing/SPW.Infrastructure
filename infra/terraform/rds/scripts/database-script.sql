@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS "profile";
+DROP TABLE IF EXISTS "role";
 DROP TABLE IF EXISTS "user" ;
 DROP TABLE IF EXISTS "special_day";
 DROP TABLE IF EXISTS "congregation";
@@ -50,9 +52,23 @@ CREATE TABLE "user" (
     "grade" VARCHAR(50),
     "birth_date" DATE NOT NULL,
     "baptism_date" DATE NOT NULL,
-    "privilege" VARCHAR(100),
-    "congregation_id" UUID NOT NULL,
-	FOREIGN KEY (congregation_id) REFERENCES "congregation"(id)
+    "privilege" VARCHAR(100)
+);
+
+CREATE TABLE "role" (
+    "id" UUID PRIMARY KEY,
+    "name" VARCHAR(50) NOT NULL,
+    "description" VARCHAR(100) NOT NULL,
+    "policy" VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE "profile" (
+    "role_id" UUID NOT NULL,
+    "user_id" UUID NOT NULL,
+    "domain_id" UUID NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES "role"(id),
+    FOREIGN KEY (user_id) REFERENCES "user"(id),
+    FOREIGN KEY (domain_id) REFERENCES "domain"(id)
 );
 
 CREATE TABLE "special_day" (
@@ -111,7 +127,10 @@ CREATE TABLE "availability" (
     FOREIGN KEY ("domain_id") REFERENCES "domain"("id")   
 );
 
-INSERT INTO "domain" ("id", "name") values ('c24d74b5-6571-4e0b-ae40-8c8a703c6c08', 'TPE - Mauá');
-INSERT INTO "circuit" ("id", "name", "domain_id") VALUES ('9879e3de-6e79-4e4b-9312-d952d54ee2e1', 'SP-002', 'c24d74b5-6571-4e0b-ae40-8c8a703c6c08');
-INSERT INTO  "congregation" ("id", "name", "number", "circuit_id") values ('31101712-771f-4604-bc16-9b2d1eb660d5', 'Central, Mauá', '4267', '9879e3de-6e79-4e4b-9312-d952d54ee2e1');
-INSERT INTO  "congregation" ("id", "name", "number", "circuit_id") values ('3fa85f64-5717-4562-b3fc-2c963f66afa6', 'Jardim Itapark, Mauá', '4267', '9879e3de-6e79-4e4b-9312-d952d54ee2e1');
+INSERT INTO "domain" ("id", "name") VALUES('c24d74b5-6571-4e0b-ae40-8c8a703c6c08', 'TPE - Mauá');
+INSERT INTO "circuit" ("id", "name", "domain_id") VALUES('9879e3de-6e79-4e4b-9312-d952d54ee2e1', 'SP-002', 'c24d74b5-6571-4e0b-ae40-8c8a703c6c08');
+INSERT INTO "congregation" ("id", "name", "number", "circuit_id") VALUES('31101712-771f-4604-bc16-9b2d1eb660d5', 'Central, Mauá', '4267', '9879e3de-6e79-4e4b-9312-d952d54ee2e1');
+INSERT INTO "congregation" ("id", "name", "number", "circuit_id") VALUES('3fa85f64-5717-4562-b3fc-2c963f66afa6', 'Jardim Itapark, Mauá', '4267', '9879e3de-6e79-4e4b-9312-d952d54ee2e1');
+INSERT INTO "role"("id", "name", "description", "policy") VALUES('761606cd-42ee-4216-94fa-3606d1ef0eb2', 'Administrator', 'This role groups administrative users', 'AdminUsers');
+INSERT INTO "role"("id", "name", "description", "policy") VALUES('e9573ad4-660b-4082-9771-7a7931bf98a2', 'Common', 'This role groups common users', 'CommonUsers');
+INSERT INTO "role"("id", "name", "description", "policy") VALUES('4ee509e3-029b-4eba-9a26-e98ac4facde3', 'Root', 'This role groups powered users', 'RootUsers');
