@@ -1,26 +1,26 @@
-# SPW.Admin.Api
+# SPW.Infrastructure
 
-## Que tipo de alteração este PR introduz?
+## What type of change does this PR introduce?
 
 - [ ] Feature
-- [ ] Testes
+- [ ] Tests
 - [ ] Bugfix
 - [ ] Refactoring
-- [ ] Outros. Por favor descreva:
+- [ ] Others. Please describe:
 
-## Alterações:
+## Changes:
 
-- Lista de alterações que foram feitas neste PR.
+- List of changes that were made to this PR.
 
-## Há algo em que você gostaria que os revisores se concentrassem?
+## Is there anything you would like reviewers to focus on?
 
-- Caso tenha algo para os revisadores focar ou N/A.
+- If there is something for reviewers to focus on or N/A.
 
-## Este PR pode causar algum tipo de alteração de interrupção no serviço em questão?
+## Could this PR cause some kind of breaking change to the service in question?
 
-- [ ] Sim
-- [ ] Não
+- [ ] Yes
+- [ ] No
 
-## Contexto (Opcional)
+## Context (Optional)
 
-No caso de ser necessário explicar um contexto para o PR.
+In case it is necessary to explain a context for the PR.
