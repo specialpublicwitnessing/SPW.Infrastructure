@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS "point";
 DROP TABLE IF EXISTS "announcement";
 DROP TABLE IF EXISTS "holiday";
 DROP TABLE IF EXISTS "domain";
-DROP TABLE IF EXISTS "day_point_schedule";
+DROP TABLE IF EXISTS "itinerary";
 
 CREATE TABLE "domain" (
 	"id" UUID PRIMARY KEY,
@@ -126,7 +126,7 @@ CREATE TABLE "availability" (
     FOREIGN KEY ("domain_id") REFERENCES "domain"("id")   
 );
 
-CREATE TABLE "day_point_schedule" (
+CREATE TABLE "itinerary" (
     "week_day" VARCHAR NOT NULL,
     "point_id" UUID NOT NULL, 
     "schedule_id" UUID NOT NULL, 
