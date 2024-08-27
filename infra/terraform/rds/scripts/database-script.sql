@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS "profile";
-DROP TABLE IF EXISTS "role";
-DROP TABLE IF EXISTS "user" ;
+DROP TABLE IF EXISTS "role"; 
+DROP TABLE IF EXISTS "user";
 DROP TABLE IF EXISTS "special_day";
 DROP TABLE IF EXISTS "congregation";
 DROP TABLE IF EXISTS "circuit";
@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS "point";
 DROP TABLE IF EXISTS "announcement";
 DROP TABLE IF EXISTS "holiday";
 DROP TABLE IF EXISTS "domain";
+DROP TABLE IF EXISTS "itinerary";
 
 CREATE TABLE "domain" (
 	"id" UUID PRIMARY KEY,
@@ -117,16 +118,25 @@ CREATE TABLE "holiday" (
 );
 
 CREATE TABLE "availability" (
-    "id" UUID PRIMARY KEY,
+    "user_id" UUID NOT NULL, 
     "week_day" VARCHAR(100) NOT NULL,
+    "schedule_id" UUID NOT NULL, 
+    "domain_id" UUID NOT NULL, 
+    FOREIGN KEY ("user_id") REFERENCES "user"("id"),
+    FOREIGN KEY ("schedule_id") REFERENCES "schedule"("id"),
+    FOREIGN KEY ("domain_id") REFERENCES "domain"("id")   
+);
+
+CREATE TABLE "itinerary" (
+    "week_day" VARCHAR NOT NULL,
     "point_id" UUID NOT NULL, 
     "schedule_id" UUID NOT NULL, 
     "domain_id" UUID NOT NULL, 
-    "status" BOOLEAN NOT NULL,
     FOREIGN KEY ("point_id") REFERENCES "point"("id"),
     FOREIGN KEY ("schedule_id") REFERENCES "schedule"("id"),
     FOREIGN KEY ("domain_id") REFERENCES "domain"("id")   
 );
+
 
 INSERT INTO "domain" ("id", "name") VALUES('c24d74b5-6571-4e0b-ae40-8c8a703c6c08', 'TPE - Mauá');
 INSERT INTO "circuit" ("id", "name", "domain_id") VALUES('9879e3de-6e79-4e4b-9312-d952d54ee2e1', 'SP-002', 'c24d74b5-6571-4e0b-ae40-8c8a703c6c08');
