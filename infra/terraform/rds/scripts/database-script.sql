@@ -63,6 +63,7 @@ CREATE TABLE "role" (
 );
 
 CREATE TABLE "profile" (
+    "id" UUID PRIMARY KEY,
     "role_id" UUID NOT NULL,
     "user_id" UUID NOT NULL,
     "domain_id" UUID NOT NULL,
