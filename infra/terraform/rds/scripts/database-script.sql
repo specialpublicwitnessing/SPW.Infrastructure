@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS "itinerary";
+DROP TABLE IF EXISTS "availability";
+DROP TABLE IF EXISTS "schedule";
 DROP TABLE IF EXISTS "profile";
 DROP TABLE IF EXISTS "role"; 
 DROP TABLE IF EXISTS "user";
@@ -5,13 +8,10 @@ DROP TABLE IF EXISTS "special_day";
 DROP TABLE IF EXISTS "congregation";
 DROP TABLE IF EXISTS "circuit";
 DROP TABLE IF EXISTS "validity";
-DROP TABLE IF EXISTS "availability";
-DROP TABLE IF EXISTS "schedule";
 DROP TABLE IF EXISTS "point";
 DROP TABLE IF EXISTS "announcement";
 DROP TABLE IF EXISTS "holiday";
 DROP TABLE IF EXISTS "domain";
-DROP TABLE IF EXISTS "itinerary";
 
 CREATE TABLE "domain" (
 	"id" UUID PRIMARY KEY,
