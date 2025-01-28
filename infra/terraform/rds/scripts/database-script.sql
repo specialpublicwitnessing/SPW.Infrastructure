@@ -29,9 +29,7 @@ CREATE TABLE "validity" (
 
 CREATE TABLE "circuit" (
 	"id" UUID PRIMARY KEY,
-	"name" VARCHAR(100) NOT NULL,
-	"domain_id" UUID NOT NULL,
-	FOREIGN KEY (domain_id) REFERENCES "domain"(id)
+	"name" VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE "congregation" (
@@ -53,7 +51,9 @@ CREATE TABLE "user" (
     "grade" VARCHAR(50),
     "birth_date" DATE NOT NULL,
     "baptism_date" DATE NOT NULL,
-    "privilege" VARCHAR(100)
+    "privilege" VARCHAR(100),
+    "congregation_id" UUID NOT NULL,
+	FOREIGN KEY (congregation_id) REFERENCES congregation(id)
 );
 
 CREATE TABLE "role" (
@@ -68,6 +68,7 @@ CREATE TABLE "profile" (
     "role_id" UUID NOT NULL,
     "user_id" UUID NOT NULL,
     "domain_id" UUID NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (role_id) REFERENCES "role"(id),
     FOREIGN KEY (user_id) REFERENCES "user"(id),
     FOREIGN KEY (domain_id) REFERENCES "domain"(id)
@@ -139,9 +140,11 @@ CREATE TABLE "itinerary" (
 
 
 INSERT INTO "domain" ("id", "name") VALUES('c24d74b5-6571-4e0b-ae40-8c8a703c6c08', 'TPE - Mauá');
-INSERT INTO "circuit" ("id", "name", "domain_id") VALUES('9879e3de-6e79-4e4b-9312-d952d54ee2e1', 'SP-002', 'c24d74b5-6571-4e0b-ae40-8c8a703c6c08');
+INSERT INTO "circuit" ("id", "name") VALUES('9879e3de-6e79-4e4b-9312-d952d54ee2e1', 'SP-002');
 INSERT INTO "congregation" ("id", "name", "number", "circuit_id") VALUES('31101712-771f-4604-bc16-9b2d1eb660d5', 'Central, Mauá', '4267', '9879e3de-6e79-4e4b-9312-d952d54ee2e1');
 INSERT INTO "congregation" ("id", "name", "number", "circuit_id") VALUES('3fa85f64-5717-4562-b3fc-2c963f66afa6', 'Jardim Itapark, Mauá', '4267', '9879e3de-6e79-4e4b-9312-d952d54ee2e1');
 INSERT INTO "role"("id", "name", "description", "policy") VALUES('761606cd-42ee-4216-94fa-3606d1ef0eb2', 'Administrator', 'This role groups administrative users', 'AdminUsers');
 INSERT INTO "role"("id", "name", "description", "policy") VALUES('e9573ad4-660b-4082-9771-7a7931bf98a2', 'Common', 'This role groups common users', 'CommonUsers');
 INSERT INTO "role"("id", "name", "description", "policy") VALUES('4ee509e3-029b-4eba-9a26-e98ac4facde3', 'Root', 'This role groups powered users', 'RootUsers');
+INSERT INTO "user"(id, "name", creation_date, email, "password", phone_number, gender, grade, birth_date, baptism_date, privilege, congregation_id) VALUES ('6766ffe0-aea0-8005-89df-2772345dafa0','Super User','2024-01-01T00:00:00','teste@gmail.com','$2a$11$sCsq6EViaAIm7e5olFMy.uatb/NABIGJXhFKVD1IZTPzMCIBv1Jdm','11997014906','Male','A','2024-01-19T00:00:00','2024-12-19T00:00:00','Publisher','31101712-771f-4604-bc16-9b2d1eb660d5');
+INSERT INTO "profile"("id", "role_id", "user_id", "domain_id") VALUES('7766ffe0-aea0-8005-89df-2772345dafa0', '4ee509e3-029b-4eba-9a26-e98ac4facde3', '6766ffe0-aea0-8005-89df-2772345dafa0', 'c24d74b5-6571-4e0b-ae40-8c8a703c6c08');

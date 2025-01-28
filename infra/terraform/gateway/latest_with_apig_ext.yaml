@@ -1,0 +1,160 @@
+openapi: "3.0.1"
+info:
+  title: "spw.api"
+  version: "2024-10-24 21:32:38UTC"
+servers:
+- url: "https://g427tf7mw0.execute-api.us-east-1.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: ""
+paths:
+  /circuits/{id}:
+    get:
+      responses:
+        default:
+          description: "Default response for GET /circuits/{id}"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Admin-Api/invocations"
+        connectionType: "INTERNET"
+    delete:
+      responses:
+        default:
+          description: "Default response for DELETE /circuits/{id}"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Admin-Api/invocations"
+        connectionType: "INTERNET"
+    parameters:
+    - name: "id"
+      in: "path"
+      description: "Generated path parameter for id"
+      required: true
+      schema:
+        type: "string"
+  /domains/{id}:
+    get:
+      responses:
+        default:
+          description: "Default response for GET /domains/{id}"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Admin-Api/invocations"
+        connectionType: "INTERNET"
+    delete:
+      responses:
+        default:
+          description: "Default response for DELETE /domains/{id}"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Admin-Api/invocations"
+        connectionType: "INTERNET"
+    parameters:
+    - name: "id"
+      in: "path"
+      description: "Generated path parameter for id"
+      required: true
+      schema:
+        type: "string"
+  /circuits:
+    get:
+      responses:
+        default:
+          description: "Default response for GET /circuits"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Admin-Api/invocations"
+        connectionType: "INTERNET"
+    put:
+      responses:
+        default:
+          description: "Default response for PUT /circuits"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Admin-Api/invocations"
+        connectionType: "INTERNET"
+    post:
+      responses:
+        default:
+          description: "Default response for POST /circuits"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Admin-Api/invocations"
+        connectionType: "INTERNET"
+  /domains:
+    get:
+      responses:
+        default:
+          description: "Default response for GET /domains"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Admin-Api/invocations"
+        connectionType: "INTERNET"
+    put:
+      responses:
+        default:
+          description: "Default response for PUT /domains"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Admin-Api/invocations"
+        connectionType: "INTERNET"
+    post:
+      responses:
+        default:
+          description: "Default response for POST /domains"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Admin-Api/invocations"
+        connectionType: "INTERNET"
+  /users:
+    get:
+      responses:
+        default:
+          description: "Default response for GET /users"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Public-Api/invocations"
+        connectionType: "INTERNET"
+  /login:
+    post:
+      responses:
+        default:
+          description: "Default response for POST /login"
+      x-amazon-apigateway-integration:
+        payloadFormatVersion: "2.0"
+        type: "aws_proxy"
+        httpMethod: "POST"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:381492060613:function:SPW-Security-Api/invocations"
+        connectionType: "INTERNET"
+x-amazon-apigateway-cors:
+  allowMethods:
+  - "*"
+  allowHeaders:
+  - "*"
+  maxAge: 0
+  allowCredentials: false
+  allowOrigins:
+  - "*"
+x-amazon-apigateway-importexport-version: "1.0"
